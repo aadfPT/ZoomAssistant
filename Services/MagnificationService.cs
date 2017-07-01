@@ -6,6 +6,8 @@ namespace ZoomAssistant.Services
 {
 	internal class MagnificationService : IDisposable
 	{
+		private readonly float ScalingIncrement = 0.04f;
+
 		private float CurrentZoom { get; set; } = 1.0f;
 		private User32.SafeHookHandle MouseHook { get; set; }
 
@@ -29,12 +31,12 @@ namespace ZoomAssistant.Services
 
 		public void DecreaseMagnification()
 		{
-			SetMagnification(Math.Max(CurrentZoom - 0.1f, 1.0f));
+			SetMagnification(Math.Max(CurrentZoom - ScalingIncrement, 1.0f));
 		}
 
 		public void IncreaseMagnification()
 		{
-			SetMagnification(CurrentZoom + 0.1f);
+			SetMagnification(CurrentZoom + ScalingIncrement);
 		}
 
 		public void ResetMagnification()
